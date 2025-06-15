@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Super Mario Bros - Play Classic Nintendo Game Online Free | ScrewAway</title>
+    <meta name="description" content="Play Super Mario Bros online for free! Experience the classic Nintendo platformer game in your browser. No downloads required - start playing instantly.">
+    <meta name="keywords" content="super mario bros, mario game online, classic nintendo games, platformer game, free online games">
+    <link rel="canonical" href="https://screwaway.xyz">
+    <meta property="og:title" content="Super Mario Bros - Play Classic Nintendo Game Online Free">
+    <meta property="og:description" content="Play Super Mario Bros online for free! Experience the classic Nintendo platformer game in your browser.">
+    <meta property="og:url" content="https://screwaway.xyz">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Super Mario Bros - Play Classic Nintendo Game Online Free">
+    <meta name="twitter:description" content="Play Super Mario Bros online for free! Experience the classic Nintendo platformer game in your browser.">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #1d1d1f;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            padding: 15px 0;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: #007aff;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #1d1d1f;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #007aff;
+        }
+
+        main {
+            padding: 40px 0;
+        }
+
+        .hero-section {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 800;
+            color: #1d1d1f;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #007aff, #5856d6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-subtitle {
+            font-size: 1.2rem;
+            color: #86868b;
+            margin-bottom: 40px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .game-container {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 50px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .game-frame {
+            width: 100%;
+            height: 600px;
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .content-section {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #1d1d1f;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: linear-gradient(135deg, #007aff, #5856d6);
+            border-radius: 2px;
+        }
+
+        p {
+            font-size: 1.1rem;
+            color: #1d1d1f;
+            margin-bottom: 20px;
+            line-height: 1.7;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .feature-card {
+            background: rgba(255, 255, 255, 0.8);
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .feature-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #1d1d1f;
+            margin-bottom: 10px;
+        }
+
+        .feature-description {
+            font-size: 0.95rem;
+            color: #86868b;
+            line-height: 1.5;
+        }
+
+        .cta-section {
+            text-align: center;
+            background: linear-gradient(135deg, #007aff, #5856d6);
+            color: white;
+            padding: 50px;
+            border-radius: 20px;
+            margin-top: 50px;
+        }
+
+        .cta-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .cta-text {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 30px;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 15px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .cta-button:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        footer {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            padding: 40px 0;
+            text-align: center;
+            border-top: 1px solid rgba(0, 0, 0, 0.1);
+            margin-top: 50px;
+        }
+
+        .footer-content {
+            color: #86868b;
+            font-size: 0.9rem;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .game-container {
+                padding: 20px;
+            }
+
+            .game-frame {
+                height: 400px;
+            }
+
+            .content-section {
+                padding: 25px;
+            }
+
+            h2 {
+                font-size: 1.5rem;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .cta-section {
+                padding: 30px 20px;
+            }
+
+            .cta-title {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 15px;
+            }
+
+            .game-frame {
+                height: 300px;
+            }
+
+            .content-section {
+                padding: 20px;
+            }
+        }
+
+        /* Loading animation */
+        .loading {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 200px;
+            font-size: 1.1rem;
+            color: #86868b;
+        }
+
+        .spinner {
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #007aff;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            animation: spin 1s linear infinite;
+            margin-right: 15px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Accessibility improvements */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+
+        /* Focus styles for keyboard navigation */
+        a:focus, button:focus, iframe:focus {
+            outline: 2px solid #007aff;
+            outline-offset: 2px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <a href="/" class="logo">ScrewAway</a>
+                <nav>
+                    <ul class="nav-links">
+                        <li><a href="#game">Play Game</a></li>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#features">Features</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <section class="hero-section">
+                <h1>Super Mario Bros</h1>
+                <p class="hero-subtitle">Relive the classic Nintendo adventure that defined a generation of gaming!</p>
+            </section>
+
+            <section id="game" class="game-container">
+                <div class="loading" id="loading">
+                    <div class="spinner"></div>
+                    Loading Super Mario Bros...
+                </div>
+                <iframe 
+                    id="gameFrame"
+                    src="https://html5.gamemonetize.com/lc3z0glrxydeamakuq96ypstn0ob81eq/" 
+                    class="game-frame"
+                    title="Super Mario Bros Online Game"
+                    frameborder="0"
+                    allowfullscreen
+                    style="display: none;">
+                </iframe>
+            </section>
+
+            <section id="about" class="content-section">
+                <h2>About Super Mario Bros</h2>
+                <p>Super Mario Bros is the legendary platformer game that revolutionized the gaming industry when it was first released by Nintendo in 1985. This timeless classic follows the adventures of Mario, the iconic plumber, as he embarks on a heroic quest to rescue Princess Peach from the villainous Bowser.</p>
+                
+                <p>Set in the vibrant Mushroom Kingdom, players navigate through eight challenging worlds, each filled with unique obstacles, enemies, and secrets. From the familiar Goombas and Koopa Troopas to the treacherous castle levels, every stage offers a perfect blend of skill-based gameplay and nostalgic charm.</p>
+                
+                <p>The game's brilliant level design, memorable soundtrack, and intuitive controls have made it one of the most beloved and influential video games of all time. Whether you're a longtime fan or discovering this masterpiece for the first time, Super Mario Bros delivers an unforgettable gaming experience that continues to captivate players across generations.</p>
+            </section>
+
+            <section id="features" class="content-section">
+                <h2>Game Features</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <span class="feature-icon">🎮</span>
+                        <h3 class="feature-title">Classic Gameplay</h3>
+                        <p class="feature-description">Experience the original Super Mario Bros gameplay with authentic controls and mechanics</p>
+                    </div>
+                    <div class="feature-card">
+                        <span class="feature-icon">🌟</span>
+                        <h3 class="feature-title">8 Worlds</h3>
+                        <p class="feature-description">Journey through 8 unique worlds with 32 challenging levels to conquer</p>
+                    </div>
+                    <div class="feature-card">
+                        <span class="feature-icon">🎵</span>
+                        <h3 class="feature-title">Iconic Music</h3>
+                        <p class="feature-description">Enjoy the legendary soundtrack that has become synonymous with gaming</p>
+                    </div>
+                    <div class="feature-card">
+                        <span class="feature-icon">💨</span>
+                        <h3 class="feature-title">Instant Play</h3>
+                        <p class="feature-description">No downloads required - start playing immediately in your browser</p>
+                    </div>
+                    <div class="feature-card">
+                        <span class="feature-icon">📱</span>
+                        <h3 class="feature-title">Mobile Friendly</h3>
+                        <p class="feature-description">Optimized for both desktop and mobile devices for gaming anywhere</p>
+                    </div>
+                    <div class="feature-card">
+                        <span class="feature-icon">🆓</span>
+                        <h3 class="feature-title">Completely Free</h3>
+                        <p class="feature-description">Play the full game without any cost or registration required</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>How to Play</h2>
+                <p>Playing Super Mario Bros is simple yet challenging. Use the arrow keys to move Mario left and right, and press the spacebar or up arrow to jump. Your mission is to navigate through each level, avoiding or defeating enemies while collecting coins and power-ups.</p>
+                
+                <p>Look out for the Super Mushroom to grow bigger and stronger, or grab the Fire Flower to shoot fireballs at enemies. Each world culminates in a castle level where you'll face increasingly difficult challenges. Remember, you have limited lives, so play carefully and use the warp zones wisely to skip ahead when possible.</p>
+                
+                <p>The ultimate goal is to rescue Princess Peach from Bowser's castle in World 8-4. Master the art of precise jumping, learn enemy patterns, and discover hidden secrets to become a true Super Mario Bros champion!</p>
+            </section>
+
+            <div class="cta-section">
+                <h2 class="cta-title">Ready to Start Your Adventure?</h2>
+                <p class="cta-text">Join millions of players who have experienced the magic of Super Mario Bros. The Mushroom Kingdom awaits!</p>
+                <a href="#game" class="cta-button">Play Now</a>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <p>&copy; 2024 ScrewAway.xyz - Play Super Mario Bros Online Free. All rights reserved.</p>
+                <p>Super Mario Bros is a trademark of Nintendo. This website is not affiliated with Nintendo.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Game loading functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const gameFrame = document.getElementById('gameFrame');
+            const loading = document.getElementById('loading');
+            
+            gameFrame.onload = function() {
+                loading.style.display = 'none';
+                gameFrame.style.display = 'block';
+            };
+            
+            // Fallback to show game frame after 5 seconds
+            setTimeout(function() {
+                loading.style.display = 'none';
+                gameFrame.style.display = 'block';
+            }, 5000);
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add some interactivity to feature cards
+        document.querySelectorAll('.feature-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-8px) scale(1.02)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+    </script>
+</body>
+</html>
