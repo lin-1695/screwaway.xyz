@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>超级马里奥兄弟 - 经典重现</title>
+    <title>马里奥世界 - 经典重现</title>
     <style>
         * {
             margin: 0;
@@ -12,11 +12,169 @@
         }
 
         body {
-            font-family: 'Arial', sans-serif;
-            background: linear-gradient(135deg, #87CEEB 0%, #4682B4 50%, #1E90FF 100%);
+            font-family: 'Microsoft YaHei', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
-            color: #333;
             overflow-x: hidden;
+        }
+
+        /* 导航栏 */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            font-size: 2rem;
+            font-weight: bold;
+            color: #ff6b6b;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .logo::before {
+            content: "🍄";
+            margin-right: 0.5rem;
+            font-size: 2.5rem;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-link {
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .nav-link:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        /* 主要内容区域 */
+        .main-content {
+            padding: 4rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .hero-section {
+            text-align: center;
+            margin-bottom: 4rem;
+            color: white;
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.5);
+            background: linear-gradient(45deg, #ff6b6b, #ffd93d, #6bcf7f, #4d9de0);
+            background-size: 400% 400%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: gradient 3s ease infinite;
+        }
+
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .hero-subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 2rem;
+        }
+
+        .start-button {
+            background: linear-gradient(45deg, #ff6b6b, #ff8e8e);
+            color: white;
+            border: none;
+            padding: 1rem 3rem;
+            font-size: 1.2rem;
+            font-weight: bold;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 25px rgba(255, 107, 107, 0.4);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .start-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(255, 107, 107, 0.6);
+            background: linear-gradient(45deg, #ff5252, #ff6b6b);
+        }
+
+        .start-button:active {
+            transform: translateY(-1px);
+        }
+
+        /* 功能卡片 */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .feature-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            color: white;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .feature-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            color: #ffd93d;
+        }
+
+        .feature-description {
+            opacity: 0.9;
+            line-height: 1.6;
         }
 
         /* 云朵动画背景 */
@@ -27,44 +185,71 @@
             width: 100%;
             height: 100%;
             pointer-events: none;
-            z-index: 1;
+            z-index: -1;
         }
 
         .cloud {
             position: absolute;
-            background: rgba(255, 255, 255, 0.8);
+            background: rgba(255, 255, 255, 0.1);
             border-radius: 50px;
-            opacity: 0.7;
             animation: float 20s infinite linear;
         }
 
-        .cloud:before,
+        .cloud:before {
+            content: '';
+            position: absolute;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50px;
+        }
+
         .cloud:after {
             content: '';
             position: absolute;
-            background: rgba(255, 255, 255, 0.8);
+            background: rgba(255, 255, 255, 0.1);
             border-radius: 50px;
         }
 
         .cloud1 {
-            width: 80px;
+            width: 100px;
             height: 40px;
             top: 20%;
-            animation-delay: 0s;
+            animation-duration: 25s;
+        }
+
+        .cloud1:before {
+            width: 50px;
+            height: 50px;
+            top: -25px;
+            left: 10px;
+        }
+
+        .cloud1:after {
+            width: 60px;
+            height: 40px;
+            top: -15px;
+            right: 10px;
         }
 
         .cloud2 {
-            width: 60px;
+            width: 80px;
             height: 30px;
             top: 40%;
-            animation-delay: -5s;
+            animation-duration: 30s;
+            animation-delay: -10s;
         }
 
-        .cloud3 {
-            width: 100px;
-            height: 50px;
-            top: 60%;
-            animation-delay: -10s;
+        .cloud2:before {
+            width: 40px;
+            height: 40px;
+            top: -20px;
+            left: 15px;
+        }
+
+        .cloud2:after {
+            width: 50px;
+            height: 30px;
+            top: -10px;
+            right: 15px;
         }
 
         @keyframes float {
@@ -72,632 +257,465 @@
             100% { transform: translateX(calc(100vw + 100px)); }
         }
 
-        /* 头部导航 */
-        .header {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(20px);
-            padding: 1rem 2rem;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            border-bottom: 3px solid #FFD700;
-        }
-
-        .nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .logo {
-            font-size: 2rem;
-            font-weight: bold;
-            color: #FF6B35;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-        }
-
-        .nav-links {
-            display: flex;
-            list-style: none;
-            gap: 2rem;
-        }
-
-        .nav-links a {
-            text-decoration: none;
-            color: #333;
-            font-weight: 600;
-            padding: 0.5rem 1rem;
-            border-radius: 25px;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .nav-links a:hover {
-            background: linear-gradient(45deg, #FF6B35, #FFD700);
-            color: white;
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(255, 107, 53, 0.4);
-        }
-
-        /* 主要内容区域 */
-        .main-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 2rem;
-            position: relative;
-            z-index: 10;
-        }
-
-        /* 英雄区域 */
-        .hero-section {
-            text-align: center;
-            padding: 4rem 0;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 30px;
-            backdrop-filter: blur(20px);
-            margin-bottom: 3rem;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-
-        .hero-title {
-            font-size: 3.5rem;
-            font-weight: bold;
-            color: #FF6B35;
-            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3);
-            margin-bottom: 1rem;
-            animation: bounce 2s infinite;
-        }
-
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
-            40% { transform: translateY(-10px); }
-            60% { transform: translateY(-5px); }
-        }
-
-        .hero-subtitle {
-            font-size: 1.3rem;
-            color: #2C3E50;
-            margin-bottom: 2rem;
-            font-weight: 500;
-        }
-
-        /* 游戏视频区域 */
-        .game-video {
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 20px;
-            padding: 2rem;
-            margin-bottom: 3rem;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
-            text-align: center;
-        }
-
-        .video-container {
-            position: relative;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-            transition: transform 0.3s ease;
-        }
-
-        .video-container:hover {
-            transform: scale(1.02);
-        }
-
-        .game-iframe {
-            width: 100%;
-            height: 400px;
-            border: none;
-            border-radius: 15px;
-        }
-
-        /* 游戏信息卡片 */
-        .game-info {
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 20px;
-            padding: 2.5rem;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
-            margin-bottom: 3rem;
-        }
-
-        .info-title {
-            font-size: 2.2rem;
-            color: #2C3E50;
-            margin-bottom: 1.5rem;
-            text-align: center;
-            position: relative;
-        }
-
-        .info-title:after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 60px;
-            height: 4px;
-            background: linear-gradient(45deg, #FF6B35, #FFD700);
-            border-radius: 2px;
-        }
-
-        .info-content {
-            font-size: 1.1rem;
-            line-height: 1.8;
-            color: #34495E;
-            text-align: justify;
-        }
-
-        /* 游戏功能卡片 */
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
-        .feature-card {
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 20px;
-            padding: 2rem;
-            text-align: center;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s ease;
-            border: 1px solid rgba(255, 215, 0, 0.3);
-        }
-
-        .feature-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
-            border-color: #FFD700;
-        }
-
-        .feature-icon {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-        }
-
-        .feature-title {
-            font-size: 1.4rem;
-            color: #2C3E50;
-            margin-bottom: 1rem;
-            font-weight: 600;
-        }
-
-        .feature-description {
-            color: #7F8C8D;
-            line-height: 1.6;
-        }
-
-        /* 开始游戏按钮 */
-        .play-button {
-            display: inline-block;
-            background: linear-gradient(45deg, #FF6B35, #FF8C42);
-            color: white;
-            padding: 1rem 3rem;
-            border-radius: 50px;
-            text-decoration: none;
-            font-size: 1.2rem;
-            font-weight: bold;
-            box-shadow: 0 10px 30px rgba(255, 107, 53, 0.4);
-            transition: all 0.3s ease;
-            border: none;
-            cursor: pointer;
-            margin: 2rem 0;
-        }
-
-        .play-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 40px rgba(255, 107, 53, 0.6);
-            background: linear-gradient(45deg, #FF8C42, #FFD700);
-        }
-
         /* 页脚 */
         .footer {
-            background: rgba(44, 62, 80, 0.95);
-            color: white;
             text-align: center;
             padding: 2rem;
-            margin-top: 4rem;
+            color: rgba(255, 255, 255, 0.8);
+            background: rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(10px);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* 游戏画布 */
+        .game-container {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #87CEEB;
+            z-index: 1000;
+        }
+
+        .game-ui {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            color: white;
+            font-weight: bold;
+            font-size: 1.2rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            z-index: 1001;
+        }
+
+        .close-game {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: #ff6b6b;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: bold;
+            z-index: 1001;
+        }
+
+        #gameCanvas {
+            display: block;
+            margin: 0 auto;
+            background: linear-gradient(to bottom, #87CEEB 0%, #98FB98 100%);
+            image-rendering: pixelated;
         }
 
         /* 响应式设计 */
         @media (max-width: 768px) {
-            .nav-links {
-                display: none;
+            .navbar {
+                flex-direction: column;
+                gap: 1rem;
             }
-            
+
+            .nav-links {
+                gap: 1rem;
+            }
+
             .hero-title {
                 font-size: 2.5rem;
             }
-            
-            .hero-subtitle {
-                font-size: 1.1rem;
-            }
-            
-            .main-container {
-                padding: 1rem;
-            }
-        }
 
-        /* 动画效果 */
-        .fade-in {
-            animation: fadeIn 1s ease-in;
-        }
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
+            .main-content {
+                padding: 2rem 1rem;
+            }
         }
     </style>
 </head>
 <body>
-    <!-- 云朵背景 -->
+    <!-- 云朵背景动画 -->
     <div class="clouds">
         <div class="cloud cloud1"></div>
         <div class="cloud cloud2"></div>
-        <div class="cloud cloud3"></div>
     </div>
 
-    <!-- 头部导航 -->
-    <header class="header">
-        <nav class="nav">
-            <div class="logo">🍄 MARIO WORLD</div>
-            <ul class="nav-links">
-                <li><a href="#game">🎮 玩游戏</a></li>
-                <li><a href="#about">📖 关于</a></li>
-                <li><a href="#features">⭐ 功能</a></li>
-            </ul>
-        </nav>
-    </header>
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <div class="logo">MARIO WORLD</div>
+        <div class="nav-links">
+            <a href="#game" class="nav-link">🎮 玩游戏</a>
+            <a href="#about" class="nav-link">📖 关于</a>
+            <a href="#features" class="nav-link">⭐ 功能</a>
+        </div>
+    </nav>
 
     <!-- 主要内容 -->
-    <main class="main-container">
-        <!-- 英雄区域 -->
-        <section class="hero-section fade-in">
+    <main class="main-content">
+        <section class="hero-section">
             <h1 class="hero-title">超级马里奥兄弟</h1>
-            <p class="hero-subtitle">重温定义了一代游戏的经典任天堂冒险游戏！</p>
-            <button class="play-button" onclick="startGame()">🚀 立即开始游戏</button>
+            <p class="hero-subtitle">经典重现 | 怀旧游戏体验</p>
+            <button class="start-button" onclick="startGame()">🚀 立即开始游戏</button>
         </section>
 
-        <!-- 游戏视频区域 -->
-        <section class="game-video fade-in" id="game">
-            <div class="video-container">
-                <div class="game-iframe" id="gameArea" style="background: linear-gradient(45deg, #4CAF50, #2E7D32); display: flex; align-items: center; justify-content: center; color: white; font-size: 1.5rem; flex-direction: column; gap: 1rem;">
-                    <div style="font-size: 2rem;">🎮</div>
-                    <div>点击上方"立即开始游戏"按钮开始游戏</div>
-                    <div style="font-size: 0.9rem; opacity: 0.8;">使用方向键或WASD控制马里奥移动</div>
-                </div>
-            </div>
-        </section>
-
-        <!-- 游戏信息 -->
-        <section class="game-info fade-in" id="about">
-            <h2 class="info-title">关于超级马里奥兄弟</h2>
-            <div class="info-content">
-                《超级马里奥兄弟》是1985年任天堂首次发布时彻底改变游戏行业的传奇平台游戏。这部永恒的经典讲述了标志性的水管工马里奥救被恶棍库巴抓走的桃花公主的故事。游戏以其创新的关卡设计、朗朗上口的音乐和令人难忘的角色而闻名，至今仍被认为是有史以来最伟大的视频游戏之一。
-            </div>
-        </section>
-
-        <!-- 功能特色 -->
         <section class="features-grid" id="features">
-            <div class="feature-card fade-in">
-                <div class="feature-icon">🎮</div>
+            <div class="feature-card">
+                <span class="feature-icon">🎮</span>
                 <h3 class="feature-title">经典游戏体验</h3>
                 <p class="feature-description">原汁原味的马里奥游戏体验，包含所有经典关卡和挑战。</p>
             </div>
-            
-            <div class="feature-card fade-in">
-                <div class="feature-icon">🏆</div>
+            <div class="feature-card">
+                <span class="feature-icon">🏆</span>
                 <h3 class="feature-title">成就系统</h3>
                 <p class="feature-description">收集金币和星星，解锁新角色，挑战最高分记录。</p>
             </div>
-            
-            <div class="feature-card fade-in">
-                <div class="feature-icon">🔧</div>
+            <div class="feature-card">
+                <span class="feature-icon">🔧</span>
                 <h3 class="feature-title">现代化功能</h3>
                 <p class="feature-description">支持现代浏览器，优化的控制体验和流畅的游戏性能。</p>
             </div>
         </section>
     </main>
 
+    <!-- 游戏容器 -->
+    <div class="game-container" id="gameContainer">
+        <div class="game-ui">
+            <div id="score">分数: 0</div>
+            <div id="lives">生命: 3</div>
+            <div id="coins">金币: 0</div>
+        </div>
+        <button class="close-game" onclick="closeGame()">❌ 返回主页</button>
+        <canvas id="gameCanvas" width="800" height="600"></canvas>
+    </div>
+
     <!-- 页脚 -->
     <footer class="footer">
-        <p>&copy; 2025 超级马里奥兄弟 - 经典重现 | 怀旧游戏体验</p>
+        <p>© 2025 超级马里奥兄弟 - 经典重现 | 怀旧游戏体验</p>
     </footer>
 
     <script>
-        // 游戏启动功能
+        // 游戏状态
+        let gameRunning = false;
+        let canvas, ctx;
+        let score = 0;
+        let lives = 3;
+        let coins = 0;
+
+        // 马里奥角色
+        let mario = {
+            x: 100,
+            y: 400,
+            width: 32,
+            height: 32,
+            velX: 0,
+            velY: 0,
+            jumping: false,
+            grounded: false,
+            color: '#ff6b6b'
+        };
+
+        // 平台
+        let platforms = [
+            {x: 0, y: 550, width: 800, height: 50, color: '#4a4a4a'},
+            {x: 200, y: 450, width: 100, height: 20, color: '#8B4513'},
+            {x: 400, y: 350, width: 100, height: 20, color: '#8B4513'},
+            {x: 600, y: 250, width: 100, height: 20, color: '#8B4513'}
+        ];
+
+        // 金币
+        let gameCoins = [
+            {x: 220, y: 400, width: 20, height: 20, collected: false},
+            {x: 420, y: 300, width: 20, height: 20, collected: false},
+            {x: 620, y: 200, width: 20, height: 20, collected: false}
+        ];
+
+        // 敌人
+        let enemies = [
+            {x: 300, y: 500, width: 25, height: 25, velX: -1, color: '#8B0000'},
+            {x: 500, y: 500, width: 25, height: 25, velX: 1, color: '#8B0000'}
+        ];
+
+        // 按键状态
+        let keys = {};
+
+        // 开始游戏
         function startGame() {
-            const gameArea = document.getElementById('gameArea');
+            const gameContainer = document.getElementById('gameContainer');
+            gameContainer.style.display = 'block';
             
-            // 显示加载状态
-            gameArea.innerHTML = `
-                <div style="font-size: 2rem; margin-bottom: 1rem;">⏳</div>
-                <div>游戏正在加载中...</div>
-                <div style="margin-top: 1rem;">
-                    <div style="width: 200px; height: 4px; background: rgba(255,255,255,0.3); border-radius: 2px;">
-                        <div id="loadingBar" style="width: 0%; height: 100%; background: #FFD700; border-radius: 2px; transition: width 0.3s ease;"></div>
-                    </div>
-                </div>
-            `;
+            canvas = document.getElementById('gameCanvas');
+            ctx = canvas.getContext('2d');
             
-            // 模拟加载过程
-            let progress = 0;
-            const loadingInterval = setInterval(() => {
-                progress += Math.random() * 30;
-                if (progress > 100) progress = 100;
-                
-                const loadingBar = document.getElementById('loadingBar');
-                if (loadingBar) {
-                    loadingBar.style.width = progress + '%';
-                }
-                
-                if (progress >= 100) {
-                    clearInterval(loadingInterval);
-                    setTimeout(() => {
-                        loadGame();
-                    }, 500);
-                }
-            }, 200);
+            // 设置画布大小
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            
+            // 调整平台位置
+            platforms[0].width = canvas.width;
+            platforms[0].y = canvas.height - 50;
+            
+            gameRunning = true;
+            gameLoop();
+            
+            // 添加事件监听器
+            document.addEventListener('keydown', handleKeyDown);
+            document.addEventListener('keyup', handleKeyUp);
         }
-        
-        function loadGame() {
-            const gameArea = document.getElementById('gameArea');
+
+        // 关闭游戏
+        function closeGame() {
+            gameRunning = false;
+            document.getElementById('gameContainer').style.display = 'none';
             
-            // 创建简单的马里奥游戏演示
-            gameArea.innerHTML = `
-                <canvas id="gameCanvas" width="460" height="400" style="border: 2px solid #8B4513; border-radius: 10px; background: #87CEEB;"></canvas>
-                <div style="margin-top: 1rem; color: #2C3E50; background: rgba(255,255,255,0.9); padding: 0.5rem; border-radius: 10px;">
-                    <strong>控制方式：</strong> ←→ 移动 | ↑ 跳跃 | 或使用 A/D/W 键
-                </div>
-            `;
+            // 移除事件监听器
+            document.removeEventListener('keydown', handleKeyDown);
+            document.removeEventListener('keyup', handleKeyUp);
             
-            // 初始化游戏
-            initGame();
+            // 重置游戏状态
+            resetGame();
         }
-        
-        function initGame() {
-            const canvas = document.getElementById('gameCanvas');
-            const ctx = canvas.getContext('2d');
+
+        // 重置游戏
+        function resetGame() {
+            mario.x = 100;
+            mario.y = 400;
+            mario.velX = 0;
+            mario.velY = 0;
+            mario.jumping = false;
+            mario.grounded = false;
             
-            // 游戏对象
-            const mario = {
-                x: 50,
-                y: 300,
-                width: 32,
-                height: 32,
-                velY: 0,
-                jumping: false,
-                grounded: false,
-                color: '#FF6B35'
-            };
+            score = 0;
+            lives = 3;
+            coins = 0;
             
-            const ground = canvas.height - 50;
-            const gravity = 0.5;
-            const jumpPower = 12;
-            const speed = 3;
+            // 重置金币
+            gameCoins.forEach(coin => coin.collected = false);
             
-            // 收集的金币
-            const coins = [
-                {x: 200, y: 250, collected: false},
-                {x: 300, y: 200, collected: false},
-                {x: 400, y: 280, collected: false}
-            ];
+            updateUI();
+        }
+
+        // 键盘事件处理
+        function handleKeyDown(e) {
+            keys[e.key] = true;
             
-            let score = 0;
-            let keys = {};
+            // 跳跃
+            if ((e.key === ' ' || e.key === 'ArrowUp') && mario.grounded) {
+                mario.velY = -12;
+                mario.jumping = true;
+                mario.grounded = false;
+            }
+        }
+
+        function handleKeyUp(e) {
+            keys[e.key] = false;
+        }
+
+        // 更新UI
+        function updateUI() {
+            document.getElementById('score').textContent = `分数: ${score}`;
+            document.getElementById('lives').textContent = `生命: ${lives}`;
+            document.getElementById('coins').textContent = `金币: ${coins}`;
+        }
+
+        // 碰撞检测
+        function checkCollision(rect1, rect2) {
+            return rect1.x < rect2.x + rect2.width &&
+                   rect1.x + rect1.width > rect2.x &&
+                   rect1.y < rect2.y + rect2.height &&
+                   rect1.y + rect1.height > rect2.y;
+        }
+
+        // 游戏主循环
+        function gameLoop() {
+            if (!gameRunning) return;
             
-            // 键盘事件
-            document.addEventListener('keydown', (e) => {
-                keys[e.key.toLowerCase()] = true;
-                keys[e.code] = true;
+            // 清除画布
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            // 绘制背景
+            const gradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
+            gradient.addColorStop(0, '#87CEEB');
+            gradient.addColorStop(1, '#98FB98');
+            ctx.fillStyle = gradient;
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            // 处理输入
+            if (keys['ArrowLeft'] || keys['a']) {
+                mario.velX = -5;
+            } else if (keys['ArrowRight'] || keys['d']) {
+                mario.velX = 5;
+            } else {
+                mario.velX *= 0.8; // 摩擦力
+            }
+            
+            // 重力
+            mario.velY += 0.5;
+            
+            // 更新马里奥位置
+            mario.x += mario.velX;
+            mario.y += mario.velY;
+            
+            // 重置接地状态
+            mario.grounded = false;
+            
+            // 平台碰撞检测
+            platforms.forEach(platform => {
+                if (checkCollision(mario, platform)) {
+                    // 从上方落下
+                    if (mario.velY > 0 && mario.y < platform.y) {
+                        mario.y = platform.y - mario.height;
+                        mario.velY = 0;
+                        mario.grounded = true;
+                        mario.jumping = false;
+                    }
+                }
             });
             
-            document.addEventListener('keyup', (e) => {
-                keys[e.key.toLowerCase()] = false;
-                keys[e.code] = false;
-            });
+            // 边界检测
+            if (mario.x < 0) mario.x = 0;
+            if (mario.x + mario.width > canvas.width) mario.x = canvas.width - mario.width;
             
-            // 游戏循环
-            function gameLoop() {
-                // 清空画布
-                ctx.fillStyle = '#87CEEB';
-                ctx.fillRect(0, 0, canvas.width, canvas.height);
-                
-                // 绘制云朵
-                drawCloud(100, 50);
-                drawCloud(300, 80);
-                
-                // 绘制地面
-                ctx.fillStyle = '#8B4513';
-                ctx.fillRect(0, ground, canvas.width, canvas.height - ground);
-                
-                // 绘制草地
-                ctx.fillStyle = '#228B22';
-                ctx.fillRect(0, ground, canvas.width, 10);
-                
-                // 处理输入
-                if (keys['arrowleft'] || keys['a']) {
-                    mario.x -= speed;
-                }
-                if (keys['arrowright'] || keys['d']) {
-                    mario.x += speed;
-                }
-                if ((keys['arrowup'] || keys['w']) && mario.grounded) {
-                    mario.velY = -jumpPower;
-                    mario.jumping = true;
-                    mario.grounded = false;
-                }
-                
-                // 物理计算
-                mario.velY += gravity;
-                mario.y += mario.velY;
-                
-                // 地面碰撞
-                if (mario.y + mario.height > ground) {
-                    mario.y = ground - mario.height;
+            // 掉落检测
+            if (mario.y > canvas.height) {
+                lives--;
+                if (lives <= 0) {
+                    alert('游戏结束！最终分数: ' + score);
+                    closeGame();
+                    return;
+                } else {
+                    // 重置位置
+                    mario.x = 100;
+                    mario.y = 400;
+                    mario.velX = 0;
                     mario.velY = 0;
-                    mario.jumping = false;
-                    mario.grounded = true;
+                }
+            }
+            
+            // 金币碰撞检测
+            gameCoins.forEach(coin => {
+                if (!coin.collected && checkCollision(mario, coin)) {
+                    coin.collected = true;
+                    coins++;
+                    score += 100;
+                }
+            });
+            
+            // 更新敌人
+            enemies.forEach(enemy => {
+                enemy.x += enemy.velX;
+                
+                // 敌人边界反弹
+                if (enemy.x <= 0 || enemy.x + enemy.width >= canvas.width) {
+                    enemy.velX *= -1;
                 }
                 
-                // 边界检查
-                if (mario.x < 0) mario.x = 0;
-                if (mario.x + mario.width > canvas.width) mario.x = canvas.width - mario.width;
-                
-                // 绘制马里奥
-                drawMario(mario.x, mario.y);
-                
-                // 绘制和检查金币
-                coins.forEach((coin, index) => {
-                    if (!coin.collected) {
-                        drawCoin(coin.x, coin.y);
-                        
-                        // 碰撞检测
-                        if (mario.x < coin.x + 20 && mario.x + mario.width > coin.x &&
-                            mario.y < coin.y + 20 && mario.y + mario.height > coin.y) {
-                            coin.collected = true;
-                            score += 100;
+                // 敌人碰撞检测
+                if (checkCollision(mario, enemy)) {
+                    // 从上方踩到敌人
+                    if (mario.velY > 0 && mario.y < enemy.y) {
+                        mario.velY = -8;
+                        score += 200;
+                        // 移除敌人（简化处理）
+                        enemy.x = -100;
+                    } else {
+                        // 被敌人撞到
+                        lives--;
+                        if (lives <= 0) {
+                            alert('游戏结束！最终分数: ' + score);
+                            closeGame();
+                            return;
+                        } else {
+                            // 重置位置
+                            mario.x = 100;
+                            mario.y = 400;
+                            mario.velX = 0;
+                            mario.velY = 0;
                         }
                     }
-                });
-                
-                // 绘制分数
-                ctx.fillStyle = '#2C3E50';
-                ctx.font = 'bold 20px Arial';
-                ctx.fillText('分数: ' + score, 10, 30);
-                
-                requestAnimationFrame(gameLoop);
-            }
-            
-            function drawMario(x, y) {
-                // 马里奥身体
-                ctx.fillStyle = '#FF6B35';
-                ctx.fillRect(x + 8, y + 8, 16, 24);
-                
-                // 马里奥帽子
-                ctx.fillStyle = '#FF0000';
-                ctx.fillRect(x + 4, y, 24, 12);
-                
-                // 马里奥脸
-                ctx.fillStyle = '#FFDBAC';
-                ctx.fillRect(x + 8, y + 4, 16, 12);
-                
-                // 马里奥眼睛
-                ctx.fillStyle = '#000';
-                ctx.fillRect(x + 10, y + 6, 2, 2);
-                ctx.fillRect(x + 20, y + 6, 2, 2);
-                
-                // 马里奥胡子
-                ctx.fillRect(x + 12, y + 10, 8, 2);
-            }
-            
-            function drawCoin(x, y) {
-                ctx.fillStyle = '#FFD700';
-                ctx.beginPath();
-                ctx.arc(x + 10, y + 10, 10, 0, Math.PI * 2);
-                ctx.fill();
-                
-                ctx.fillStyle = '#FFA500';
-                ctx.font = 'bold 12px Arial';
-                ctx.textAlign = 'center';
-                ctx.fillText('
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
                 }
             });
-        }, observerOptions);
-
-        // 观察所有fade-in元素
-        document.querySelectorAll('.fade-in').forEach(el => {
-            el.style.opacity = '0';
-            el.style.transform = 'translateY(30px)';
-            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-            observer.observe(el);
-        });
-
-        // 平滑滚动
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
-    </script>
-</body>
-</html>, x + 10, y + 15);
-                ctx.textAlign = 'left';
-            }
             
-            function drawCloud(x, y) {
-                ctx.fillStyle = 'rgba(255, 255, 255, 0.8)';
-                ctx.beginPath();
-                ctx.arc(x, y, 15, 0, Math.PI * 2);
-                ctx.arc(x + 15, y, 20, 0, Math.PI * 2);
-                ctx.arc(x + 35, y, 15, 0, Math.PI * 2);
-                ctx.arc(x + 10, y - 10, 12, 0, Math.PI * 2);
-                ctx.arc(x + 25, y - 10, 12, 0, Math.PI * 2);
-                ctx.fill();
-            }
+            // 绘制马里奥
+            ctx.fillStyle = mario.color;
+            ctx.fillRect(mario.x, mario.y, mario.width, mario.height);
             
-            // 开始游戏循环
-            gameLoop();
-        }
-        
-        // 添加滚动动画效果
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
+            // 绘制眼睛
+            ctx.fillStyle = 'white';
+            ctx.fillRect(mario.x + 8, mario.y + 8, 6, 6);
+            ctx.fillRect(mario.x + 18, mario.y + 8, 6, 6);
+            ctx.fillStyle = 'black';
+            ctx.fillRect(mario.x + 10, mario.y + 10, 2, 2);
+            ctx.fillRect(mario.x + 20, mario.y + 10, 2, 2);
+            
+            // 绘制平台
+            platforms.forEach(platform => {
+                ctx.fillStyle = platform.color;
+                ctx.fillRect(platform.x, platform.y, platform.width, platform.height);
+            });
+            
+            // 绘制金币
+            gameCoins.forEach(coin => {
+                if (!coin.collected) {
+                    ctx.fillStyle = '#FFD700';
+                    ctx.beginPath();
+                    ctx.arc(coin.x + coin.width/2, coin.y + coin.height/2, coin.width/2, 0, Math.PI * 2);
+                    ctx.fill();
+                    
+                    // 金币闪烁效果
+                    ctx.fillStyle = '#FFA500';
+                    ctx.beginPath();
+                    ctx.arc(coin.x + coin.width/2, coin.y + coin.height/2, coin.width/3, 0, Math.PI * 2);
+                    ctx.fill();
                 }
             });
-        }, observerOptions);
+            
+            // 绘制敌人// 绘制敌人
+            enemies.forEach(enemy => {enemies.forEach(enemy => {
+                if (敌人.x > -100) {if (enemy.x > -100) {
+                    ctx.fillStyle = 敌人的颜色;ctx.fillStyle = enemy.color;
+                    ctx.fillRect(enemy.x, enemy.y, enemy.width, enemy.height);ctx.fillRect(enemy.x, enemy.y, enemy.width, enemy.height);
+                    
+                    // 敌人眼睛// 敌人眼睛
+                    ctx.fillStyle = 'red';ctx.fillStyle = 'red';
+                    ctx.fillRect(enemy.x + 5, enemy.y + 5, 4, 4);ctx.fillRect(enemy.x + 5, enemy.y + 5, 4, 4);
+                    ctx.fillRect(enemy.x + 16, enemy.y + 5, 4, 4);ctx.fillRect(enemy.x + 16, enemy.y + 5, 4, 4);
+                }}
+            });});
+            
+            // 更新UI// 更新UI
+            更新用户界面();updateUI();
+            
+            // 继续游戏循环// 继续游戏循环
+            requestAnimationFrame(gameLoop);requestAnimationFrame(gameLoop);
+        }}
 
-        // 观察所有fade-in元素
-        document.querySelectorAll('.fade-in').forEach(el => {
-            el.style.opacity = '0';
-            el.style.transform = 'translateY(30px)';
-            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-            observer.observe(el);
-        });
+        // 平滑滚动// 平滑滚动
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {anchor.addEventListener('click', function (e) {
+                e.preventDefault();e.preventDefault();
+                常量 目标 = 文档.querySelector(这.getAttribute('href'));常量 目标 = 文档.querySelector(这.getAttribute('href'));
+                如果 (目标) {如果 (目标) {
+                    目标.滚动到视图({目标.滚动到视图({
+                        行为：'平滑'行为：'平滑',
+                        块：'开始'块：'开始'
+                    });});
+                }}
+            });});
+        });});
 
-        // 平滑滚动
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
-    </script>
-</body>
-</html>
+        // 窗口大小调整
+// 窗口大小调整
+        窗口.addEventListener('resize', 函数() {窗口.addEventListener('resize', 函数() {
+            如果 (游戏正在运行 && canvas) {如果 (游戏正在运行 && canvas) {
+                画布.宽度 = 窗口.内部宽度;画布.宽度 = 窗口.内部宽度;
+                canvas.height = window.innerHeight;canvas.height = window.innerHeight;
+                platforms[0].width = canvas.width;platforms[0].width = canvas.width;
+                platforms[0].y = canvas.height - 50;platforms[0].y = canvas.height - 50;
+            }}
+        });});
+    </脚本>
+</主体>
+        </html>
